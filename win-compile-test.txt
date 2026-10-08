@@ -1,0 +1,29 @@
+set NDK=D:\android_sdk\ndk\30.0.16248370
+set TARGET=aarch64-linux-android
+set API=34
+set CXX=%NDK%\toolchains\llvm\prebuilt\windows-x86_64\bin\%TARGET%%API%-clang++.cmd
+
+
+
+find duckdetector -maxdepth 1 -type f -iregex ".*.[ch]p*" -exec sed -i "s|#include ""[^""]*/|#include ""|g" {} +
+
+
+%CXX% -O2 -ffunction-sections -fdata-sections -fvisibility=hidden -fvisibility-inlines-hidden ^
+permission_boundary_netlink.cpp permission_boundary_link.cpp permission_boundary_neigh.cpp duckdetector.cpp ^
+-static-libstdc++ -o test
+
+adb push test /data/local/tmp/
+
+
+------------------------------------------------------------------------------------
+test stuff:
+
+find duckdetector -maxdepth 1 -type f \( -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.hpp" \) -exec sed -i "s|#include ""[^""]*/|#include ""|g" {} +
+find duckdetector -maxdepth 1 -type f \( -name "*.c" -or -name "*.h" -or -name "*.cpp" -or -name "*.hpp" \) -exec sed -i "s|#include \"[^\"]*/\([^\"]*\)\"|#include \"\1\"|g" {} +
+
+%CXX% -O0 permission_boundary_netlink.cpp permission_boundary_link.cpp permission_boundary_neigh.cpp duckdetector.cpp -static-libstdc++ -o test
+adb push test /data/local/tmp/
+
+
+
+clear && chmod +x /data/local/tmp/test  && /data/local/tmp/test && rm /data/local/tmp/test
