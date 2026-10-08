@@ -26,6 +26,7 @@ DUCK_SRC_FILES 		:= $(addprefix nativeroot/, $(filter %.c %.cpp, $(DUCK_DETECTOR
 
 
 all: clean download_duck make_neighbor check_neighbor
+no_check: clean download_duck make_neighbor
 
 download_duck:
 	@echo "-------- Downloading Duck Detector (eltavine) sources"
@@ -60,4 +61,4 @@ clean:
 	MSYS_NO_PATHCONV=1 adb shell "rm /data/local/tmp/test_neighbor"
 	@echo -e "\n"
 
-.PHONY: all clean download_duck make_neighbor check_neighbor
+.PHONY: clean all no_check download_duck make_neighbor check_neighbor
