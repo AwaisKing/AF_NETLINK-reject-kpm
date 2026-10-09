@@ -7,6 +7,12 @@ description:
 -
 this module rejects AF_NETLINK for `untrusted_apps` (UID 10000 to 19999)
 
+<p align="center">
+  <img src="images/scr1.png" width="32%" alt="Screen 1">
+  <img src="images/scr2.png" width="32%" alt="Screen 2">
+  <img src="images/scr3.png" width="32%" alt="Screen 3">
+</p>
+
 ---
 how to compile:
 -
